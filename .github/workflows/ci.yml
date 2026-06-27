@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-ci.txt
           pip install ruff pytest pytest-cov
       - name: Lint with Ruff
         run: ruff check .
