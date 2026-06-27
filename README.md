@@ -207,5 +207,3 @@ finapi-finsentiment/
 FinBERT is a BERT model fine-tuned on financial corpora (analyst reports, Reuters, Bloomberg).
 It classifies text into positive, neutral, or negative sentiment with high accuracy
 on financial jargon such as "beat estimates", "guidance raised", or "missed targets".
-
----
