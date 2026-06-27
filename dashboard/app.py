@@ -1,23 +1,23 @@
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import importlib.util
 from datetime import datetime
+
 import streamlit as st
 
 # Import api_client directly
 _spec = importlib.util.spec_from_file_location(
-    "api_client",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "api_client.py")
+    "api_client", os.path.join(os.path.dirname(os.path.abspath(__file__)), "api_client.py")
 )
 api = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(api)
 
 # Import charts directly
 _spec2 = importlib.util.spec_from_file_location(
-    "charts",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "charts.py")
+    "charts", os.path.join(os.path.dirname(os.path.abspath(__file__)), "charts.py")
 )
 _charts = importlib.util.module_from_spec(_spec2)
 _spec2.loader.exec_module(_charts)
@@ -68,18 +68,22 @@ with st.sidebar:
 st.title(f":chart_with_upwards_trend: FinSentiment - {ticker}")
 st.caption("Dashboard interactif - prix, news, sentiment FinBERT")
 
+
 # -------- Donnees --------
 @st.cache_data(ttl=60)
 def load_prices(t: str):
     return api.get_db_prices(t)
 
+
 @st.cache_data(ttl=60)
 def load_news(t: str):
     return api.get_db_news(t)
 
+
 @st.cache_data(ttl=60)
 def load_summary(t: str):
     return api.get_sentiment_summary(t)
+
 
 prices = load_prices(ticker)
 news = load_news(ticker)

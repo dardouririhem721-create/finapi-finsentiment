@@ -1,19 +1,18 @@
-""" Calcule le sentiment des news qui n'en ont pas encore ."""
+"""Calcule le sentiment des news qui n'en ont pas encore ."""
+
 import logging
+
 from finapi.db import SessionLocal
 from finapi.models import NewsItem
 from finapi.sentiment import analyze_batch
+
 
 def main(batch_size: int = 32) -> int:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
     log = logging.getLogger(__name__)
 
     with SessionLocal() as session:
-        rows = (
-            session.query(NewsItem)
-            .filter(NewsItem.sentiment_label.is_(None))
-            .all()
-        )
+        rows = session.query(NewsItem).filter(NewsItem.sentiment_label.is_(None)).all()
         log.info("News a enrichir : %d", len(rows))
         if not rows:
             return 0
@@ -29,6 +28,7 @@ def main(batch_size: int = 32) -> int:
             log.info("Batch %d-%d traite", i, i + len(chunk))
 
     return len(rows)
+
 
 if __name__ == "__main__":
     n = main()

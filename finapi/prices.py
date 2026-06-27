@@ -1,10 +1,14 @@
 """Acces aux donnees de marche via yfinance."""
+
 from dataclasses import dataclass
 from datetime import date
+
 import yfinance as yf
+
 
 class TickerNotFoundError(Exception):
     """Levee lorsqu'aucune donnee n'est trouvee."""
+
 
 @dataclass
 class LatestPrice:
@@ -12,6 +16,7 @@ class LatestPrice:
     date: date
     close: float
     currency: str
+
 
 def get_latest_price(ticker: str) -> LatestPrice:
     """Renvoie le dernier prix de cloture pour 'ticker'."""
@@ -31,10 +36,13 @@ def get_latest_price(ticker: str) -> LatestPrice:
         close=round(float(last_row["Close"]), 2),
         currency=currency.upper(),
     )
+
+
 @dataclass
 class PricePoint:
     date: date
     close: float
+
 
 def get_history(ticker: str, days: int) -> list[PricePoint]:
     """Renvoie l'historique des cours de cloture sur N jours."""

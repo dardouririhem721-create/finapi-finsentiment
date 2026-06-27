@@ -1,9 +1,9 @@
 """Modeles SQLAlchemy : prix et news."""
-from datetime import date, datetime
-from sqlalchemy import (
-    Column, Integer, String, Float, Date, DateTime, UniqueConstraint
-)
+
+from sqlalchemy import Column, Date, DateTime, Float, Integer, String, UniqueConstraint
+
 from finapi.db import Base
+
 
 class PriceRecord(Base):
     __tablename__ = "prices"
@@ -12,9 +12,8 @@ class PriceRecord(Base):
     date = Column(Date, nullable=False, index=True)
     close = Column(Float, nullable=False)
     currency = Column(String(8), default="USD")
-    __table_args__ = (
-        UniqueConstraint("ticker", "date", name="uq_ticker_date"),
-    )
+    __table_args__ = (UniqueConstraint("ticker", "date", name="uq_ticker_date"),)
+
 
 class NewsItem(Base):
     __tablename__ = "news"

@@ -1,4 +1,5 @@
 """Fixtures partagees entre tests."""
+
 import pytest
 
 from finapi.app import create_app

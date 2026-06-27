@@ -1,12 +1,16 @@
 """ETL des news : recuperation via yfinance.news."""
+
 import logging
 from datetime import datetime
+
 import yfinance as yf
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
+
 from finapi.db import SessionLocal
 from finapi.models import NewsItem
 
 log = logging.getLogger(__name__)
+
 
 def ingest_news(ticker: str) -> int:
     """Recupere les news recentes pour un ticker et les stocke."""
@@ -19,19 +23,19 @@ def ingest_news(ticker: str) -> int:
         if not published:
             continue
         try:
-            published_at = datetime.fromisoformat(
-                published.replace("Z", "+00:00")
-            )
+            published_at = datetime.fromisoformat(published.replace("Z", "+00:00"))
         except ValueError:
             continue
-        rows.append({
-            "ticker": ticker.upper(),
-            "published_at": published_at,
-            "title": content.get("title", "")[:500],
-            "publisher": (content.get("provider") or {}).get("displayName", ""),
-            "url": (content.get("clickThroughUrl") or {}).get("url"),
-            "summary": (content.get("summary") or "")[:2000],
-        })
+        rows.append(
+            {
+                "ticker": ticker.upper(),
+                "published_at": published_at,
+                "title": content.get("title", "")[:500],
+                "publisher": (content.get("provider") or {}).get("displayName", ""),
+                "url": (content.get("clickThroughUrl") or {}).get("url"),
+                "summary": (content.get("summary") or "")[:2000],
+            }
+        )
     if not rows:
         log.warning("ETL news : aucun article pour %s", ticker)
         return 0
