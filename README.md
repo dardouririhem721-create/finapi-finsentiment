@@ -1,3 +1,5 @@
+![CI](https://github.com/dardouririhem721-create/finapi-finsentiment/actions/workflows/ci.yml/badge.svg)
+
 # FinAPI — Financial Sentiment Analysis Engine
 
 > **Python · Flask · FinBERT · SQLite · Streamlit · Hugging Face Transformers**
@@ -24,13 +26,14 @@ Master en Économie et Finance Quantitatives
 | Lab 2 | ETL Pipeline — Data storage | SQLAlchemy · SQLite | ✅ Done |
 | Lab 3 | NLP — Financial sentiment analysis | FinBERT · Transformers | ✅ Done |
 | Lab 4 | Dashboard — Interactive UI | Streamlit · Plotly | ✅ Done |
+| Lab 5 | Versioning, Tests & CI/CD | Git · pytest · Ruff · GitHub Actions | ✅ Done |
 
 ---
 
 ## Installation
 
-git clone https://github.com/dardouririhem721-create/finapi-lab1
-cd finapi-lab1
+git clone https://github.com/dardouririhem721-create/finapi-finsentiment
+cd finapi-finsentiment
 python -m venv .venv
 source .venv/Scripts/activate
 pip install -r requirements.txt
@@ -66,6 +69,21 @@ streamlit run dashboard/app.py
 Then open http://localhost:8501
 
 ![dashboard](docs/screenshots/dashboard.png)
+
+---
+
+## Tests & CI (Lab 5)
+
+Run tests locally :
+pytest -v
+
+Run tests with coverage :
+pytest --cov=finapi --cov-report=term-missing
+
+Lint with Ruff :
+ruff check .
+
+The CI pipeline runs automatically on every push to main via GitHub Actions.
 
 ---
 
@@ -135,7 +153,11 @@ python scripts/enrich_sentiment.py
 
 ## Project Structure
 
-finapi-lab1/
+finapi-finsentiment/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 │
 ├── finapi/
 │   ├── __init__.py
@@ -167,17 +189,23 @@ finapi-lab1/
 │   └── finapi.db
 │
 ├── tests/
+│   ├── __init__.py
+│   ├── conftest.py
+│   ├── test_app_health.py
+│   ├── test_history_validation.py
+│   └── test_sentiment.py
+│
 ├── pyproject.toml
 ├── requirements.txt
+├── requirements-ci.txt
 └── README.md
 
 ---
 
-##  About FinBERT
+## About FinBERT
 
 FinBERT is a BERT model fine-tuned on financial corpora (analyst reports, Reuters, Bloomberg).
 It classifies text into positive, neutral, or negative sentiment with high accuracy
 on financial jargon such as "beat estimates", "guidance raised", or "missed targets".
 
 ---
-
