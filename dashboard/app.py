@@ -143,3 +143,26 @@ else:
 
 st.divider()
 st.caption(f"Mis a jour : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+# -------- Page About --------
+st.divider()
+with st.expander("ℹ️ About this app"):
+    st.markdown("""
+    ### FinSentiment Dashboard
+    
+    Application d'analyse de sentiment financier construite en 6 labs.
+    
+    **Auteur :** Rihem Dardouri  
+    **Formation :** Master en Économie et Finance Quantitatives — ITBS  
+    **Coach :** Mr. Ahmed Ben Taleb — ITBS · SMARTLab ISG Tunis
+    
+    **Stack technique :**
+    - 🐍 Python · Flask · Streamlit
+    - 🤖 FinBERT (Hugging Face Transformers)
+    - 🗄️ SQLite · SQLAlchemy
+    - 📈 yfinance · Plotly
+    - ⚙️ pytest · Ruff · GitHub Actions
+    
+    **Liens :**
+    - [GitHub Repository](https://github.com/dardouririhem721-create/finapi-finsentiment)
+    - [Hugging Face Space](https://huggingface.co/spaces/rihemfinance/finsentiment)
+    """)
