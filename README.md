@@ -1,5 +1,14 @@
-![CI](https://github.com/dardouririhem721-create/finapi-finsentiment/actions/workflows/ci.yml/badge.svg)
-[![codecov](https://codecov.io/gh/dardouririhem721-create/finapi-finsentiment/branch/main/graph/badge.svg)](https://codecov.io/gh/dardouririhem721-create/finapi-finsentiment)
+---
+title: FinSentiment
+emoji: 📈
+colorFrom: blue
+colorTo: yellow
+sdk: docker
+python_version: "3.11"
+app_file: app.py
+pinned: false
+license: mit
+---
 # FinAPI — Financial Sentiment Analysis Engine
 
 > **Python · Flask · FinBERT · SQLite · Streamlit · Hugging Face Transformers**
