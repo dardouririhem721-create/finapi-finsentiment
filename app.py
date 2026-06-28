@@ -22,7 +22,8 @@ def bootstrap_data():
     from finapi.etl.prices_etl import ingest_prices
     from scripts.enrich_sentiment import main as enrich
 
-    for t in ["AAPL", "MSFT", "GOOGL", "TSLA"]:
+    tickers_env = os.getenv("TICKERS", "AAPL,MSFT,GOOGL,TSLA")
+    for t in tickers_env.split(","):
         ingest_prices(t, period="1mo")
         ingest_news(t)
     enrich()
